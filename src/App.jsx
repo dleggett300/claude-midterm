@@ -1,29 +1,38 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { ToastProvider } from './context/ToastContext.jsx'
 
-// Pages
-import Landing   from './pages/Landing.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import Income    from './pages/Income.jsx'
-import Expenses  from './pages/Expenses.jsx'
-import Receipts  from './pages/Receipts.jsx'
-import Tasks     from './pages/Tasks.jsx'
-
-// Layout wraps all dashboard routes with sidebar
-import Layout from './components/Layout.jsx'
+import Landing        from './pages/Landing.jsx'
+import Login          from './pages/Login.jsx'
+import Dashboard      from './pages/Dashboard.jsx'
+import Income         from './pages/Income.jsx'
+import Expenses       from './pages/Expenses.jsx'
+import Receipts       from './pages/Receipts.jsx'
+import Tasks          from './pages/Tasks.jsx'
+import Layout         from './components/Layout.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 const router = createBrowserRouter(
   [
-    { path: '/', element: <Landing /> },
+    { path: '/',      element: <Landing /> },
+    { path: '/login', element: <Login /> },
+
+    // All dashboard routes require authentication
     {
-      element: <Layout />,
+      element: <ProtectedRoute />,
       children: [
-        { path: '/dashboard', element: <Dashboard /> },
-        { path: '/income',    element: <Income /> },
-        { path: '/expenses',  element: <Expenses /> },
-        { path: '/receipts',  element: <Receipts /> },
-        { path: '/tasks',     element: <Tasks /> },
+        {
+          element: <Layout />,
+          children: [
+            { path: '/dashboard', element: <Dashboard /> },
+            { path: '/income',    element: <Income /> },
+            { path: '/expenses',  element: <Expenses /> },
+            { path: '/receipts',  element: <Receipts /> },
+            { path: '/tasks',     element: <Tasks /> },
+          ],
+        },
       ],
     },
+
     { path: '*', element: <Navigate to="/" replace /> },
   ],
   {
@@ -35,5 +44,9 @@ const router = createBrowserRouter(
 )
 
 export default function App() {
-  return <RouterProvider router={router} />
+  return (
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
+  )
 }

@@ -1,42 +1,40 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-
-const STORAGE_KEY = 'dml-bizcompanion'
-
-const defaultState = {
-  income:   [],
-  expenses: [],
-  receipts: [],
-  tasks:    [],
-}
-
-function loadFromStorage() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? { ...defaultState, ...JSON.parse(raw) } : defaultState
-  } catch {
-    return defaultState
-  }
-}
+import { supabase } from '../lib/supabase'
 
 const AppContext = createContext(null)
 
 export function AppProvider({ children }) {
-  const [income,   setIncome]   = useState(() => loadFromStorage().income)
-  const [expenses, setExpenses] = useState(() => loadFromStorage().expenses)
-  const [receipts, setReceipts] = useState(() => loadFromStorage().receipts)
-  const [tasks,    setTasks]    = useState(() => loadFromStorage().tasks)
+  const [user,    setUser]    = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  // Sync all state to localStorage whenever anything changes
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ income, expenses, receipts, tasks }))
-    } catch {
-      // localStorage may be full (e.g. large base64 receipts) — fail silently
+    // If Supabase isn't configured yet, skip auth checks
+    if (!supabase) {
+      setLoading(false)
+      return
     }
-  }, [income, expenses, receipts, tasks])
+
+    // Get the current session on mount
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null)
+      setLoading(false)
+    })
+
+    // Listen for auth state changes (login, logout, token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  async function signOut() {
+    if (supabase) await supabase.auth.signOut()
+    setUser(null)
+  }
 
   return (
-    <AppContext.Provider value={{ income, expenses, receipts, tasks, setIncome, setExpenses, setReceipts, setTasks }}>
+    <AppContext.Provider value={{ user, loading, signOut }}>
       {children}
     </AppContext.Provider>
   )
