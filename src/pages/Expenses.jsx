@@ -214,7 +214,13 @@ export default function Expenses() {
   async function handleViewReceipt(path) {
     try {
       const url = await getReceiptUrl(path)
-      window.open(url, '_blank')
+      const a = document.createElement('a')
+      a.href = url
+      a.target = '_blank'
+      a.rel = 'noopener noreferrer'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
     } catch (err) {
       setError(err.message)
       toast(err.message, 'error')
@@ -557,8 +563,8 @@ export default function Expenses() {
                   <th className="px-4 py-3 text-left">Date</th>
                   <th className="px-4 py-3 text-left">Description</th>
                   <th className="px-4 py-3 text-right">Amount</th>
-                  <th className="px-4 py-3 text-left">Notes</th>
-                  <th className="px-4 py-3 text-center">Receipt</th>
+                  <th className="px-4 py-3 text-left hidden md:table-cell">Notes</th>
+                  <th className="px-4 py-3 text-center hidden sm:table-cell">Receipt</th>
                   <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -577,8 +583,8 @@ export default function Expenses() {
                     <td className="px-4 py-3 text-right font-semibold text-brand-600 whitespace-nowrap">
                       {formatCompact(entry.amount)}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 max-w-xs">{entry.notes || '—'}</td>
-                    <td className="px-4 py-3 text-center">
+                    <td className="px-4 py-3 text-gray-500 max-w-xs hidden md:table-cell">{entry.notes || '—'}</td>
+                    <td className="px-4 py-3 text-center hidden sm:table-cell">
                       {entry.receipt_path ? (
                         <button
                           onClick={() => handleViewReceipt(entry.receipt_path)}
