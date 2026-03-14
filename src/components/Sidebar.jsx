@@ -69,12 +69,12 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`hidden sm:flex flex-col shrink-0 bg-brand-900 text-white overflow-hidden transition-[width] duration-300 ease-in-out ${
+      className={`hidden sm:flex flex-col shrink-0 bg-brand-500 text-[#eeeeee] overflow-hidden transition-[width] duration-300 ease-in-out ${
         collapsed ? 'w-16' : 'w-56'
       }`}
     >
       {/* Header — "D" always visible, rest of name fades in */}
-      <div className="h-[60px] flex items-center px-[18px] border-b border-brand-700 overflow-hidden">
+      <div className="h-[60px] flex items-center px-[18px] border-b border-black/20 overflow-hidden">
         <span className="text-lg font-bold shrink-0">D</span>
         <span className={`text-base font-bold tracking-tight ${labelClass}`}>
           ML BizCompanion
@@ -93,8 +93,8 @@ export default function Sidebar() {
                 collapsed ? 'justify-center' : ''
               } ${
                 isActive
-                  ? 'bg-brand-700 text-white'
-                  : 'text-brand-200 hover:bg-brand-800 hover:text-white'
+                  ? 'bg-black/25 text-white'
+                  : 'text-[#eeeeee] hover:bg-black/15 hover:text-white'
               }`
             }
           >
@@ -105,12 +105,12 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom: sign out + collapse toggle */}
-      <div className="px-2 py-4 border-t border-brand-700 space-y-1 overflow-hidden">
+      <div className="px-2 py-4 border-t border-black/20 space-y-1 overflow-hidden">
         {/* Sign out */}
         <button
           onClick={handleSignOut}
           title={collapsed ? 'Sign out' : undefined}
-          className={`w-full flex items-center gap-3 px-2 py-2 rounded-lg text-sm font-medium text-brand-200 hover:bg-brand-800 hover:text-white transition-colors ${
+          className={`w-full flex items-center gap-3 px-2 py-2 rounded-lg text-sm font-medium text-[#eeeeee] hover:bg-black/15 hover:text-white transition-colors ${
             collapsed ? 'justify-center' : ''
           }`}
         >
@@ -125,7 +125,7 @@ export default function Sidebar() {
         <button
           onClick={toggle}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className={`w-full flex items-center px-2 py-2 rounded-lg text-brand-500 hover:bg-brand-800 hover:text-brand-300 transition-colors ${
+          className={`w-full flex items-center px-2 py-2 rounded-lg text-[#eeeeee]/60 hover:bg-black/15 hover:text-[#eeeeee] transition-colors ${
             collapsed ? 'justify-center' : 'justify-end'
           }`}
         >

@@ -88,7 +88,7 @@ function buildItemsLabel(entry) {
 
 function SummaryCard({ label, value, subValue, valueColor = 'text-gray-900' }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 min-w-0">
+    <div className="bg-white rounded-xl border-2 border-black/30 p-5 min-w-0">
       <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2 truncate">{label}</p>
       <p className={`text-2xl font-bold truncate ${valueColor}`}>{value}</p>
       {subValue && <p className="text-xs text-gray-400 mt-1 truncate">{subValue}</p>}
@@ -183,14 +183,14 @@ export default function Dashboard() {
       </div>
 
       {/* ── 8.3 Monthly chart ── */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
+      <div className="bg-white rounded-xl border-2 border-black/30 p-5">
         <h2 className="text-sm font-semibold text-gray-700 mb-1">Monthly Overview</h2>
         <p className="text-xs text-gray-400 mb-4">Income vs Expenses · {YEAR}</p>
         <MonthlyChart data={monthlyData} />
       </div>
 
       {/* ── 8.4 Quarterly chart ── */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
+      <div className="bg-white rounded-xl border-2 border-black/30 p-5">
         <h2 className="text-sm font-semibold text-gray-700 mb-1">Quarterly Summary</h2>
         <p className="text-xs text-gray-400 mb-4">Income vs Expenses · {YEAR}</p>
         <QuarterlyChart data={quarterlyData} />
@@ -200,7 +200,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         {/* 8.5 — Recent Income */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl border-2 border-black/30 overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <h2 className="text-sm font-semibold text-gray-700">Recent Income</h2>
             <Link to="/income" className="text-xs text-brand-500 hover:text-brand-700 font-medium">
@@ -238,7 +238,7 @@ export default function Dashboard() {
         </div>
 
         {/* 8.6 — Recent Expenses */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-xl border-2 border-black/30 overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
             <h2 className="text-sm font-semibold text-gray-700">Recent Expenses</h2>
             <Link to="/expenses" className="text-xs text-brand-500 hover:text-brand-700 font-medium">
@@ -282,7 +282,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── 8.7 Active Tasks widget ── */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border-2 border-black/30 overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h2 className="text-sm font-semibold text-gray-700">Active Tasks</h2>
           <Link to="/tasks" className="text-xs text-brand-500 hover:text-brand-700 font-medium">

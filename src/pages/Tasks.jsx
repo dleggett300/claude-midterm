@@ -51,7 +51,7 @@ function TasksSkeleton() {
   return (
     <div className="space-y-2 animate-pulse">
       {[0, 1, 2].map(i => (
-        <div key={i} className="bg-white rounded-xl border border-gray-200 px-4 py-3">
+        <div key={i} className="bg-white rounded-xl border-2 border-black/30 px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded bg-gray-200 shrink-0" />
             <div className="h-4 flex-1 bg-gray-200 rounded" />
@@ -276,7 +276,7 @@ export default function Tasks() {
             placeholder="Search tasks…"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="flex-1 border-2 border-black/20 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
           <button
             onClick={() => { setShowSearch(false); setSearch('') }}
@@ -289,7 +289,7 @@ export default function Tasks() {
 
       {/* ── ADD / EDIT TASK FORM (6.7 / 6.8) ── */}
       {showForm && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div className="bg-white rounded-xl border-2 border-black/30 p-6 mb-6">
           <h2 className="text-base font-semibold text-gray-800 mb-4">
             {editingTask ? 'Edit Task' : 'New Task'}
           </h2>
@@ -305,7 +305,7 @@ export default function Tasks() {
                 placeholder="What needs to be done?"
                 maxLength={MAX_LEN.title}
                 autoFocus
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full border-2 border-black/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
             </div>
 
@@ -358,7 +358,7 @@ export default function Tasks() {
                   type="date"
                   value={formDueDate}
                   onChange={e => setFormDueDate(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="border-2 border-black/20 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 />
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function Tasks() {
       {loading ? (
         <TasksSkeleton />
       ) : activeTasks.length === 0 ? (
-        <div className="bg-white rounded-xl border border-gray-200 px-6 py-12 flex flex-col items-center gap-3 text-center">
+        <div className="bg-white rounded-xl border-2 border-black/30 px-6 py-12 flex flex-col items-center gap-3 text-center">
           {search.trim() ? (
             <>
               <p className="text-gray-500 font-medium text-sm">No active tasks match "{search}".</p>
@@ -407,7 +407,7 @@ export default function Tasks() {
       ) : (
         <div className="space-y-2">
           {activeTasks.map(task => (
-            <div key={task.id} className="bg-white rounded-xl border border-gray-200">
+            <div key={task.id} className="bg-white rounded-xl border-2 border-black/30">
 
               {/* ── Parent task row (6.4 / 6.8) ── */}
               <div className="flex items-center gap-3 px-4 py-3">
@@ -506,7 +506,7 @@ export default function Tasks() {
                     placeholder="Sub-task title..."
                     maxLength={MAX_LEN.title}
                     autoFocus
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="flex-1 border-2 border-black/20 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                   />
                   <button
                     type="button"
@@ -534,7 +534,7 @@ export default function Tasks() {
         <div className="mt-8">
           <button
             onClick={() => setShowCatalog(v => !v)}
-            className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-xl border-2 border-black/30 hover:bg-gray-50 transition-colors"
           >
             <span className="text-sm font-semibold text-gray-600">
               🏆 Catalog of Success
@@ -548,7 +548,7 @@ export default function Tasks() {
           {showCatalog && (
             <div className="mt-2 space-y-2">
               {completedTasks.map(task => (
-                <div key={task.id} className="bg-white rounded-xl border border-gray-200 opacity-70">
+                <div key={task.id} className="bg-white rounded-xl border-2 border-black/30 opacity-70">
 
                   {/* Completed parent row */}
                   <div className="flex items-center gap-3 px-4 py-3">

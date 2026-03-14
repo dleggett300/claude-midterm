@@ -20,7 +20,7 @@ function yTick(value) {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-sm px-3 py-2 text-sm">
+    <div className="bg-white border-2 border-black/30 rounded-lg shadow-sm px-3 py-2 text-sm">
       <p className="font-semibold text-gray-700 mb-1">{label}</p>
       {payload.map(entry => (
         <p key={entry.name} style={{ color: entry.color }}>

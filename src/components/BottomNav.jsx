@@ -50,14 +50,14 @@ export default function BottomNav() {
   }
 
   return (
-    <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-brand-900 border-t border-brand-700 z-50 flex items-stretch">
+    <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-brand-500 border-t border-black/20 z-50 flex items-stretch">
       {links.map(({ to, label, icon }) => (
         <NavLink
           key={to}
           to={to}
           className={({ isActive }) =>
             `flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-medium transition-colors ` +
-            (isActive ? 'text-white' : 'text-brand-300 hover:text-white')
+            (isActive ? 'text-white' : 'text-[#eeeeee] hover:text-white')
           }
         >
           {icon}
@@ -68,7 +68,7 @@ export default function BottomNav() {
       {/* Sign out */}
       <button
         onClick={handleSignOut}
-        className="flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-medium text-brand-300 hover:text-white transition-colors"
+        className="flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10px] font-medium text-[#eeeeee] hover:text-white transition-colors"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
           <path fillRule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clipRule="evenodd" />

@@ -268,7 +268,7 @@ export default function Income() {
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Income</h1>
 
       {/* ── ENTRY FORM ── */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+      <div className="bg-white rounded-xl border-2 border-black/30 p-6 mb-8">
         <h2 className="text-lg font-semibold text-gray-800 mb-5">
           {editingId ? 'Edit Income Entry' : 'New Income Entry'}
         </h2>
@@ -283,7 +283,7 @@ export default function Income() {
               value={date}
               onChange={e => setDate(e.target.value)}
               required
-              className="w-full sm:w-48 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full sm:w-48 border-2 border-black/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
           </div>
 
@@ -329,7 +329,7 @@ export default function Income() {
                     value={newServiceName}
                     onChange={e => setNewServiceName(e.target.value)}
                     maxLength={MAX_LEN.serviceName}
-                    className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-44"
+                    className="border-2 border-black/20 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-44"
                   />
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
@@ -341,7 +341,7 @@ export default function Income() {
                       step="0.01"
                       value={newServicePrice}
                       onChange={e => setNewServicePrice(e.target.value)}
-                      className="border border-gray-300 rounded-lg pl-7 pr-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-28"
+                      className="border-2 border-black/20 rounded-lg pl-7 pr-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-28"
                     />
                   </div>
                   <button type="button" onClick={handleAddService} className="bg-brand-500 hover:bg-brand-600 text-white text-sm px-3 py-1.5 rounded-lg">
@@ -380,7 +380,7 @@ export default function Income() {
                 value={customDesc}
                 onChange={e => setCustomDesc(e.target.value)}
                 maxLength={MAX_LEN.description}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 flex-1 min-w-[10rem]"
+                className="border-2 border-black/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 flex-1 min-w-[10rem]"
               />
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
@@ -392,7 +392,7 @@ export default function Income() {
                   step="0.01"
                   value={customPrice}
                   onChange={e => setCustomPrice(e.target.value)}
-                  className="border border-gray-300 rounded-lg pl-7 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-32"
+                  className="border-2 border-black/20 rounded-lg pl-7 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-32"
                 />
               </div>
             </div>
@@ -409,7 +409,7 @@ export default function Income() {
               rows={2}
               maxLength={MAX_LEN.notes}
               placeholder="Any additional comments..."
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
+              className="w-full border-2 border-black/20 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
             />
           </div>
 
@@ -442,7 +442,7 @@ export default function Income() {
       </div>
 
       {/* ── HISTORY TABLE ── */}
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white rounded-xl border-2 border-black/30">
         {/* Header row — title + icon buttons */}
         <div className="px-6 py-3 border-b border-gray-100 flex items-center gap-2">
           <h2 className="text-lg font-semibold text-gray-800 mr-auto whitespace-nowrap">Income History</h2>
@@ -453,7 +453,7 @@ export default function Income() {
               <button
                 onClick={exportCSV}
                 title="Export to CSV"
-                className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-700 border border-gray-300 hover:border-gray-400 rounded-lg px-2.5 py-1.5 transition-colors"
+                className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-700 border-2 border-black/20 hover:border-gray-400 rounded-lg px-2.5 py-1.5 transition-colors"
               >
                 <DownloadIcon />
                 CSV
@@ -499,7 +499,7 @@ export default function Income() {
                 {showFilters && (
                   <>
                     <div className="fixed inset-0 z-[5]" onClick={() => setShowFilters(false)} />
-                    <div className="absolute right-0 top-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg p-4 z-10 w-52">
+                    <div className="absolute right-0 top-full mt-2 bg-white border-2 border-black/30 rounded-xl shadow-lg p-4 z-10 w-52">
                       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Date Range</p>
                       <div className="space-y-3">
                         <div>
@@ -508,7 +508,7 @@ export default function Income() {
                             type="date"
                             value={filterFrom}
                             onChange={e => setFilterFrom(e.target.value)}
-                            className="w-full border border-gray-300 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full border-2 border-black/20 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                           />
                         </div>
                         <div>
@@ -517,7 +517,7 @@ export default function Income() {
                             type="date"
                             value={filterTo}
                             onChange={e => setFilterTo(e.target.value)}
-                            className="w-full border border-gray-300 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                            className="w-full border-2 border-black/20 rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                           />
                         </div>
                       </div>
@@ -546,7 +546,7 @@ export default function Income() {
               placeholder="Search entries…"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="flex-1 border-2 border-black/20 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
             <button
               onClick={() => { setShowSearch(false); setSearch('') }}
