@@ -297,7 +297,7 @@ export default function Income() {
 
             <div className="space-y-2 mb-3">
               {recurringItems.map(item => (
-                <div key={item.id} className="flex items-center justify-between group">
+                <div key={item.id} className="flex items-center">
                   <label className="flex items-center gap-2 cursor-pointer select-none">
                     <input
                       type="checkbox"
@@ -307,15 +307,15 @@ export default function Income() {
                     />
                     <span className="text-sm text-gray-800">{item.name}</span>
                     <span className="text-sm font-medium text-brand-600">{formatCurrency(item.price)}</span>
+                    <button
+                      type="button"
+                      onClick={e => { e.preventDefault(); handleRemoveService(item.id) }}
+                      className="text-gray-300 hover:text-red-400 text-xs transition-colors ml-1"
+                      title="Remove service"
+                    >
+                      ✕
+                    </button>
                   </label>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveService(item.id)}
-                    className="text-gray-300 hover:text-red-400 text-xs opacity-0 group-hover:opacity-100 transition-opacity ml-4"
-                    title="Remove service"
-                  >
-                    ✕
-                  </button>
                 </div>
               ))}
             </div>

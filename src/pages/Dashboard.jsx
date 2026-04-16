@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useIncome } from '../hooks/useIncome'
 import { useExpenses } from '../hooks/useExpenses'
 import { useTasks } from '../hooks/useTasks'
+import { useOllamaSummary } from '../hooks/useOllamaSummary'
 import { aggregateByMonth, aggregateByQuarter } from '../lib/chartHelpers'
 import MonthlyChart from '../components/MonthlyChart'
 import QuarterlyChart from '../components/QuarterlyChart'
@@ -100,6 +101,7 @@ export default function Dashboard() {
   const { income,   loading: incomeLoading   } = useIncome()
   const { expenses, loading: expensesLoading } = useExpenses()
   const { tasks,    loading: tasksLoading, toggleTask } = useTasks()
+  const { summary, loading: aiLoading, error: aiError, generate } = useOllamaSummary()
   const toast = useToast()
 
   const loading = incomeLoading || expensesLoading || tasksLoading
@@ -180,6 +182,70 @@ export default function Dashboard() {
           value={String(openTasks)}
           valueColor="text-brand-500"
         />
+      </div>
+
+      {/* ── AI Business Summary ── */}
+      <div className="bg-white rounded-xl border-2 border-black/30 p-5">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h2 className="text-sm font-semibold text-gray-700">AI Business Summary</h2>
+            <p className="text-xs text-gray-400">Powered by Ollama · runs locally on your machine</p>
+          </div>
+          <button
+            onClick={() => generate({ income, expenses, tasks })}
+            disabled={aiLoading}
+            className="flex items-center gap-1.5 bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-colors shrink-0"
+          >
+            {aiLoading ? (
+              <>
+                <svg className="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                </svg>
+                Thinking…
+              </>
+            ) : summary ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
+                  <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138.75.75 0 0 0-1.449-.39Zm1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0v2.43l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219Z" clipRule="evenodd" />
+                </svg>
+                Refresh
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
+                  <path d="M10 1a6 6 0 0 0-3.815 10.631C7.237 12.5 8 13.443 8 14.456v.644a.75.75 0 0 0 .572.729 6.016 6.016 0 0 0 2.856 0A.75.75 0 0 0 12 15.1v-.644c0-1.013.762-1.957 1.815-2.825A6 6 0 0 0 10 1ZM8.863 17.414a.75.75 0 0 0-.226 1.483 9.066 9.066 0 0 0 2.726 0 .75.75 0 0 0-.226-1.483 7.553 7.553 0 0 1-2.274 0Z" />
+                </svg>
+                Generate
+              </>
+            )}
+          </button>
+        </div>
+
+        {aiError && (
+          <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600 whitespace-pre-line">
+            {aiError}
+          </div>
+        )}
+
+        {(summary || aiLoading) && !aiError && (
+          <p className="text-sm text-gray-700 leading-relaxed">
+            {summary}
+            {aiLoading && (
+              <span className="inline-flex gap-0.5 ml-1 align-middle">
+                <span className="w-1 h-1 bg-brand-400 rounded-full animate-bounce [animation-delay:0ms]"/>
+                <span className="w-1 h-1 bg-brand-400 rounded-full animate-bounce [animation-delay:150ms]"/>
+                <span className="w-1 h-1 bg-brand-400 rounded-full animate-bounce [animation-delay:300ms]"/>
+              </span>
+            )}
+          </p>
+        )}
+
+        {!summary && !aiLoading && !aiError && (
+          <p className="text-sm text-gray-400 italic">
+            Click "Generate" to get an AI-powered analysis of your business health.
+          </p>
+        )}
       </div>
 
       {/* ── 8.3 Monthly chart ── */}
