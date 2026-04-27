@@ -166,6 +166,16 @@ export default function Charts() {
     )
   }
 
+  // When picking 3M/6M/12M, force month grouping — year/quarter grouping with
+  // a short window produces 1–2 bars and hides the monthly detail the user expects.
+  // YTD and All leave groupBy untouched so the user's choice is preserved.
+  function handleRangeChange(range) {
+    setDateRange(range)
+    if (range === '3m' || range === '6m' || range === '12m') {
+      setGroupBy('month')
+    }
+  }
+
   function handleLoadChart(config) {
     if (config.chartType)       setChartType(config.chartType)
     if (config.metrics?.length) setSelectedMetrics(config.metrics)
@@ -221,7 +231,7 @@ export default function Charts() {
 
           <div className="space-y-1.5">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Range</p>
-            <SegmentedControl options={RANGE_OPTIONS} value={dateRange} onChange={setDateRange} />
+            <SegmentedControl options={RANGE_OPTIONS} value={dateRange} onChange={handleRangeChange} />
           </div>
         </div>
 
