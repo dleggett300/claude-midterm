@@ -8,6 +8,7 @@ import Income         from './pages/Income.jsx'
 import Expenses       from './pages/Expenses.jsx'
 import Receipts       from './pages/Receipts.jsx'
 import Tasks          from './pages/Tasks.jsx'
+import Charts         from './pages/Charts.jsx'
 import Layout         from './components/Layout.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
             { path: '/expenses',  element: <Expenses /> },
             { path: '/receipts',  element: <Receipts /> },
             { path: '/tasks',     element: <Tasks /> },
+            { path: '/charts',    element: <Charts /> },
           ],
         },
       ],
