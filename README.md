@@ -1,3 +1,9 @@
+WEEK 12 AI FEATURE:
+
+I used Ollama to locally create a summary based on each users individual income, expenses, and current due tasks. You need to have Ollama installed and running locally to use it. I plan to use a cloud-based AI to make it accessible for all users on the deployed site later.
+
+--
+
 Description:
 
 My application is a manager / companion app for my freelancing business. I am able to input expenses and incomes and view them as graphs, manage important tasks, export charts, and more.
